@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Army Evg</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        /* Estilos básicos y reinicios */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
+
+        body {
+            text-align: center;
+            font-family: 'Arial', sans-serif; /* Cambio a una fuente más moderna */
+            color: #fff; /* Texto blanco por defecto */
+            background-color: #171717; /* Fondo oscuro por defecto */
+            margin: 0;
+            padding: 0;
+        }
+
+        .head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 63px;
+            background: #171717;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 0 20px;
+            top: 0;
+        }
+
+        .logo {
+            margin-left: 30px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            margin-right: 10px;
+        }
+
+        .navbar a {
+            display: block;
+            padding: 20px 15px;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 18px; /* Tamaño de fuente ajustado */
+        }
+
+        .navbar a:hover {
+            background: #3f3f3f;
+        }
+
+        .content {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px; /* Ajustar según sea necesario */
+        }
+
+        .header {
+            height: calc(100vh - 63px);
+            background: url('descarga.jpeg') no-repeat center center / cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 20px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Superposición oscura */
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 80%;
+        }
+
+        .title {
+            margin-bottom: 20px;
+            font-size: 48px; /* Fuente más grande */
+            font-weight: 700; /* Más negrita */
+            text-transform: uppercase;
+            color: #fff;
+            line-height: 1.2; /* Espaciado entre líneas */
+            animation: fadeInDown 1s ease-out; /* Animación de entrada */
+        }
+
+        p {
+            margin-bottom: 40px;
+            font-size: 20px; /* Fuente más grande */
+            color: #fff;
+            padding: 0 20px; /* Menos padding */
+            line-height: 1.5; /* Espaciado entre líneas */
+            animation: fadeInUp 1s ease-out; /* Animación de entrada */
+        }
+
+        .btn-home {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px; /* Espacio entre los botones */
+            animation: fadeInUp 1s ease-out; /* Animación de entrada */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border: 2px solid #9c27b0;
+            color: #fff;
+            text-decoration: none;
+            background: #9c27b0;
+            font-size: 18px; /* Tamaño de fuente ajustado */
+            transition: background 0.3s, transform 0.3s;
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        .btn:hover {
+            background: none;
+            color: #9c27b0;
+            transform: scale(1.05); /* Pequeña escala en hover */
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilos específicos para las secciones */
+
+        .sau {
+            background: #1f1d1d;
+        }
+
+        .about {
+            background: #171717;
+        }
+
+        .contact {
+            padding: 20px;
+            background: #171717;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            background: #1f1d1d;
+            color: #fff;
+        }
+
+        .styled-table thead tr {
+            background: #3f3f3f;
+            color: #fff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #3f3f3f;
+        }
+
+        .styled-table tbody tr:hover {
+            background: #3f3f3f;
+        }
+
+        .card {
+            background: #1f1d1d;
+            border-radius: 1rem;
+            box-shadow: 0 .3rem 5rem rgba(0, 0, 0, 0.5);
+            margin: 2rem;
+            padding: 1rem;
+            color: #fff;
+            width: 80%;
+            text-align: left;
+        }
+
+        .card-header {
+            font-size: 1.5em;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            margin-bottom: 1rem;
+        }
+
+        /* Media queries para dispositivos móviles */
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 32px; /* Ajustar el tamaño de fuente para móviles */
+            }
+
+            p {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+
+            .navbar {
+                display: none; /* Ocultar la navbar en pantallas pequeñas */
+            }
+
+            .btn-home {
+                flex-direction: column;
+                gap: 10px; /* Menos espacio entre botones en móvil */
+            }
+        }
+
+        /* Otros estilos específicos para las secciones */
+    </style>
+</head>
+<body>
+
+    <div class="head">
+        <div class="logo">
+            <a href="#">Logo</a>
+        </div>
+        <nav class="navbar">
+            <a href="#inicio" onclick="showSection('inicio')">Inicio</a>
+            <a href="#armas" onclick="showSection('armas')">Armas</a>
+            <a href="#accesorios" onclick="showSection('accesorios')">Accesorios</a>
+            <a href="#contacto" onclick="showSection('contacto')">Contacto</a>
+        </nav>
+    </div>
+
+    <header class="content header" id="inicio">
+        <div class="header-content">
+            <h2 class="title">Bienvenido</h2>
+            <p>
+                Descubre la mejor tienda de armas con productos de alta calidad y una excelente atención al cliente. 
+            </p>
+            <div class="btn-home">
+                <a href="#armas" class="btn" onclick="showSection('armas')">Explorar Armas</a>
+                <a href="#accesorios" class="btn" onclick="showSection('accesorios')">Ver Accesorios</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="content sau" id="armas" style="display: none;">
+        <h2 class="title">Armas</h2>
+        <div class="card">
+            <div class="card-header">
+                ARMERIA
+            </div>
+            <div class="card-body">
+                <h4 class="card-title"></h4>
+            </div>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th> Nombre </th>
+                        <th> Imagen </th>
+                        <th> Descripción </th>
+                        <th> Precio </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> AK47 </td>
+                        <td><img src="ak47.jpeg" height="200"></td>
+                        <td>Arma de soldado</td>
+                        <td>500 US$</td>
+                    </tr>
+                    <tr>
+                        <td> Escopeta </td>
+                        <td><img src="escopeta.jpeg" height="200"></td>
+                        <td>Arma de fuego portátil larga, con uno o dos cañones</td>
+                        <td>600 US$</td>
+                    </tr>
+                    <tr>
+                        <td> McMillan Tac-50 </td>
+                        <td><img src="francotirador.jpeg" height="100"></td>
+                        <td>Este fusil es un modelo antiblindaje/antipersona de largo alcance</td>
+                        <td>1500 US$</td>
+                    </tr>
+                    <tr>
+                        <td> Revolver </td>
+                        <td><img src="revolver.jpeg" height="200"></td>
+                        <td>Tipo de pistola que se caracteriza por tener la munición alojada en varias recámaras</td>
+                        <td>200 US$</td>       
+                    </tr>
+                    <tr>
+                        <td> Subfusil </td>
+                        <td><img src="subfusil.jpeg" height="200"></td>
+                        <td>Es un arma totalmente automática, diseñada para disparar munición de pistola</td>
+                        <td>350 US$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="content about" id="accesorios" style="display: none;">
+        <h2 class="title">Accesorios</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th> Nombre </th>
+                    <th> Imagen </th>
+                    <th> Descripción </th>
+                    <th> Precio </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> Silenciador </td>
+                    <td><img src="silenciador.jpeg" height="150"></td>
+                    <td>Reduce el ruido del disparo</td>
+                    <td>100 US$</td>
+                </tr>
+                <tr>
+                    <td> Mira Telescópica </td>
+                    <td><img src="miraa.jpeg" height="150"></td>
+                    <td>Mejora la precisión a largas distancias</td>
+                    <td>200 US$</td>
+                </tr>
+                <tr>
+                    <td> Chaleco Antibalas </td>
+                    <td><img src="chaleco.jpeg" height="200"></td>
+                    <td>Protección balística para el torso</td>
+                    <td>500 US$</td>
+                </tr>
+                <tr>
+                    <td> Cargador Extendido </td>
+                    <td><img src="cargador.jpeg" height="200"></td>
+                    <td>Aumenta la capacidad de munición</td>
+                    <td>50 US$</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="content contact" id="contacto" style="display: none;">
+        <h2 class="title">Contacto</h2>
+        <p>54845156</p>
+        <figure class="map">
+            <img src="mapa.png" height="220px" width="100%" alt="Mapa de la ubicación de la tienda">
+        </figure>
+    </section>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).style.display = 'flex';
+        }
+    </script>
+
+</body>
+</html>
